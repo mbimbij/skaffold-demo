@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: skaffold-demo
+  name: skaffold-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: skaffold-demo
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: skaffold-demo
+    spec:
+      containers:
+      - image: cless91/skaffold-demo:latest
+        name: skaffold-demo
+#        imagePullPolicy: Never
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: skaffold-demo
+spec:
+  type: LoadBalancer
+  selector:
+    app: skaffold-demo
+  ports:
+    # Default port used by the image
+    - port: 80
+      protocol: TCP
+      targetPort: 8080

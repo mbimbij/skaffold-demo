@@ -1,0 +1,13 @@
+apiVersion: skaffold/v2beta17
+kind: Config
+metadata:
+  name: skaffold-demo
+build:
+  artifacts:
+  - image: cless91/skaffold-demo
+    buildpacks:
+      builder: gcr.io/buildpacks/builder:v1
+deploy:
+  kubectl:
+    manifests:
+    - application-kube.yml
